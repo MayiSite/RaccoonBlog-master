@@ -1,0 +1,13 @@
+﻿@{
+    Layout = "~/Views/Shared/_ErrorLayout.cshtml";
+}
+
+<div class="error">
+    <div class="padding">
+        <div class="error-number">
+            #@ViewBag.ErrorCode
+        </div>
+        <img src="~/Content/css/img/error.png" class="error-image">
+        <a href="@Url.Action(MVC.Posts.ActionNames.Index, MVC.Posts.Name)" class="btn-home">Go to home page</a>
+    </div>
+</div>

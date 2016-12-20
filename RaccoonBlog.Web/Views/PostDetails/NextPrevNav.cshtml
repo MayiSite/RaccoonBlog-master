@@ -1,0 +1,62 @@
+﻿@model PostViewModel
+
+
+@helper PreviousSeriesArticleLink(PostViewModel model)
+{
+var prev = model.GetPreviousPostInSeries();
+if (prev != null)
+{
+        <a href="@Url.Post(prev.Id, prev.Slug)" class="pull-left series">
+            @Html.Glyphicon("chevron-left")
+            <span class="hidden-xs">&nbsp; 上一类文章</span>
+        </a>
+}
+}
+
+@helper NextSeriesArticleLink(PostViewModel model)
+{
+var next = model.GetNextPostInSeries();
+if (next != null)
+{
+        <a href="@Url.Post(next.Id, next.Slug)" class="pull-right series">
+            <span class="hidden-xs">&nbsp; 下一类文章</span>
+            @Html.Glyphicon("chevron-right")
+        </a>
+}
+}
+
+@helper SeriesLink(PostViewModel model)
+{
+if (model.IsSeriesArticle())
+{
+        <a href="@Url.Series(Model.SeriesInfo.SeriesId, Model.SeriesInfo.SeriesSlug)" class="pull-left series">
+            <i class="glyphicon glyphicon-book"></i>
+            &nbsp;<span class="hidden-xs">all </span>series<span class="hidden-xs"> 文章</span>
+        </a>
+}
+}
+
+<nav class="nextPrev">
+    @if (Model.PreviousPost != null)
+    {
+        <a class="pull-left" href="@Url.Post(Model.PreviousPost.DomainId, Model.PreviousPost.Slug)">
+            @Html.Glyphicon("chevron-left")<span class="hidden-xs">&nbsp; 上一篇</span>
+        </a>
+    }
+
+    @if (Model.NextPost != null)
+    {
+        <a class="pull-right" href="@Url.Post(Model.NextPost.DomainId, Model.NextPost.Slug)">
+            <span class="hidden-xs">下一篇 &nbsp;</span>
+            @Html.Glyphicon("chevron-right")
+        </a>
+    }
+
+    @PreviousSeriesArticleLink(Model)
+
+    @SeriesLink(Model)
+
+    @NextSeriesArticleLink(Model)
+
+    <div class="clearfix"></div>
+</nav>

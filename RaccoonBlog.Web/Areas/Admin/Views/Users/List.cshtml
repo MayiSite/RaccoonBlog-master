@@ -1,0 +1,28 @@
+﻿@model IList<UserSummeryViewModel>
+@{
+	ViewBag.Title = "Users";
+}
+
+<h3 class="pull-left-sm">所有</h3>
+<a href="@Url.Action("Add", "Users")" class="btn btn-primary btn-sm pull-right-sm">新增</a>
+<div class="clearfix"></div>
+<hr />
+
+@foreach (var user in Model)
+{
+    <div class="row user">
+        <div class="col-sm-6 col-md-4 col-lg-3"> <div class="small">名称</div><div class="lead">@user.FullName</div></div>
+        <div class="col-sm-6 col-md-4 col-lg-3"> <div class="small">邮箱</div><div class="lead">@user.Email</div> </div>
+        <div class="col-sm-6 col-md-4 col-lg-3"> <div class="small">电话</div><div class="lead">@user.Phone</div> </div>
+        <div class="col-sm-6 col-md-4 col-lg-3"> <div class="small">启用</div><div class="lead">@(user.Enabled ? "yes" : "no")</div> </div>
+        <div class="col-sm-6 col-md-4 col-lg-3"> <div class="small">Twitter Nick </div><div class="lead">@user.TwitterNick</div>	</div>
+        <div class="col-sm-6 col-md-4 col-lg-3"> <a href="@Url.Action("Edit", new {user.Id})" class="btn btn-primary btn-block">编辑</a></div>
+        <div class="col-sm-6 col-md-4 col-lg-3"> <a href="@Url.Action("ChangePassword", new {user.Id})" class="btn btn-primary btn-block">更改密码</a></div>
+        <div class="col-sm-6 col-md-4 col-lg-3">
+            @using (Html.BeginForm("SetActivation", "Users", new { id = user.Id, isActive = user.Enabled == false }))
+            {
+                <input type="submit" value="@(user.Enabled ? "禁用" : "激活")" class="btn btn-warning btn-block">
+            }
+        </div>
+    </div>
+}

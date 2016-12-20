@@ -1,0 +1,18 @@
+﻿@model CurrentUserViewModel
+@{
+	Layout = "";    
+}
+@if (Model.IsAuthenticated())
+{ 
+	<div id="adminPanel">
+        <h4>管理面板</h4>
+		<p>欢迎 @Model.FullName!</p>
+		<ol>
+			<li><a href="@Url.Action("Index", "Posts", new { area = "Admin" })">文章</a></li>
+			<li><a href="@Url.Action("Index", "Sections", new { area = "Admin" })">部分页</a></li>
+			<li><a href="@Url.Action("Index", "Users", new { area = "Admin" })">用户</a></li>
+			<li><a href="@Url.Action("Index", "Settings", new { area = "Admin" })">设置</a></li>
+			<li><a href="@Url.Action("Logout", "Login", new { area = "Admin" })">退出</a></li>
+		</ol>
+	</div>
+}

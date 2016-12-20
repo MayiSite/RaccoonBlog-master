@@ -1,0 +1,36 @@
+﻿@model ContactMeViewModel
+@{
+	Layout = "";
+}
+@{
+	string text = null;
+	if (string.IsNullOrEmpty(Model.Phone) == false && string.IsNullOrEmpty(Model.Email) == false)
+	{
+		text = "You can reach me by phone or email:";
+	}
+	else if (string.IsNullOrEmpty(Model.Phone) == false)
+	{
+		text = "You can reach me by phone:";
+	}
+	else if (string.IsNullOrEmpty(Model.Email) == false)
+	{
+		text = "You can reach me by phone or email:";
+	}
+}
+<span>你好!</span><br />
+<span>我叫</span> <span>@Model.FullName</span><br />
+<br />
+@if (string.IsNullOrEmpty(text) == false)
+{
+	<span>@text</span><br />
+}
+@if (string.IsNullOrEmpty(Model.Email) == false)
+{
+	<p class="mail"><a href="@string.Format("mailto:{0}", Model.Email)">@Model.Email</a></p>
+}
+@if (string.IsNullOrEmpty(Model.Phone) == false)
+{
+	<p class="phone">@Model.Phone</p>
+}
+
+
